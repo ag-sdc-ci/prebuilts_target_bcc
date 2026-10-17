@@ -1,0 +1,59 @@
+// Auto-generated prebuilt APEX Blueprint for external/bcc
+// Staged from Extractive APEX package: ext-bcc (org.blisslabs.ag.ext.bcc)
+
+package {
+    default_applicable_licenses: ["external_bcc_license"],
+}
+
+license {
+    name: "external_bcc_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+        "SPDX-license-identifier-BSD",
+        "SPDX-license-identifier-BSL-1.0",
+        "SPDX-license-identifier-GPL",
+        "SPDX-license-identifier-GPL-2.0",
+        "SPDX-license-identifier-MIT",
+        "SPDX-license-identifier-NCSA",
+        "legacy_unencumbered",
+    ],
+    license_text: [
+        "LICENSE",
+        "LICENSE.txt",
+    ],
+}
+
+cc_library_headers {
+    name: "libbpf_bcc_headers",
+    vendor_available: true,
+    host_supported: false,
+    native_bridge_supported: true,
+    export_include_dirs: ["include"],
+    target: {
+        linux_bionic: {
+            enabled: true,
+        },
+    },
+}
+
+cc_prebuilt_library {
+    name: "libbpf_bcc",
+    vendor_available: true,
+    host_supported: false,
+    native_bridge_supported: true,
+    shared: {
+        srcs: ["lib/libbpf_bcc.so"],
+    },
+    static: {
+        srcs: ["lib/libbpf_bcc.a"],
+    },
+    export_include_dirs: ["include"],
+    header_libs: [
+        "libbpf_bcc_headers",
+    ],
+    export_header_lib_headers: ["libbpf_bcc_headers"],
+    shared_libs: [
+        "libbpf_minimal",
+    ],
+}
